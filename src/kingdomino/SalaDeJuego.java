@@ -1,9 +1,8 @@
 package kingdomino;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JOptionPane;
 
 import InterfazGrafica.VentanaPartida;
 
@@ -12,12 +11,18 @@ public class SalaDeJuego {
 	private String nombreSala;
 	private int cantJugadores = 0;
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
-	private boolean estado = false; // se refiere a sí hay una partida iniciada
+	private boolean estado = false; // se refiere a sï¿½ hay una partida iniciada
 	private Partida partida;
 	public VentanaPartida ventana;
+	protected Socket socket;
 
 	public SalaDeJuego(String nombre) {
 		this.nombreSala = nombre;
+	}
+	
+	public SalaDeJuego(String nombre, Socket socket) {
+		this.nombreSala = nombre;
+		this.socket = socket;
 	}
 
 	public void mostrarJugadores() {
@@ -53,10 +58,7 @@ public class SalaDeJuego {
 	}
 
 	public void jugarPartida() {
-		Object [] mazos ={"MazoTradicional","MazoMonopoly"};
-		Object tipoMazo = JOptionPane.showInputDialog(null, "Selecciona un mazo", "Mazo", JOptionPane.QUESTION_MESSAGE, null, mazos, mazos[0]);
-
-		ventana = new VentanaPartida(this, (String)tipoMazo);
+		ventana = new VentanaPartida(this);
 		Ronda ronda = new Ronda();
 		int cantRondas;
 		if (cantJugadores == 2)
@@ -104,9 +106,28 @@ public class SalaDeJuego {
 	public String toString() {
 		return "Sala De Juego " + nombreSala + "\t Cantidad de Jugadores" + cantJugadores;
 	}
-
-	public static void main(String[] args) {
-		// Juego de 4 jugadores--------------
+	
+	public static void comenzarPartidaDe2() {
+		SalaDeJuego sala = new SalaDeJuego("Sala De Prueba");
+		Jugador jugador1 = new Jugador("Jugador1Rojo", 1, "Rojo");
+		Jugador jugador2 = new Jugador("Jugador2Verde", 2, "Verde");
+		jugador1.ingresarASalaDeJuego(sala);
+		jugador2.ingresarASalaDeJuego(sala);
+		jugador1.iniciarPartida(sala);
+	}
+	
+	public static void comenzarPartidaDe3() {
+		SalaDeJuego sala = new SalaDeJuego("Sala De Prueba");
+		Jugador jugador1 = new Jugador("Jugador1Rojo", 1, "Rojo");
+		Jugador jugador2 = new Jugador("Jugador2Verde", 2, "Verde");
+		Jugador jugador3 = new Jugador("Jugador3Azul", 3, "Azul");
+		jugador1.ingresarASalaDeJuego(sala);
+		jugador2.ingresarASalaDeJuego(sala);
+		jugador3.ingresarASalaDeJuego(sala);
+		jugador1.iniciarPartida(sala);
+	}
+	
+	public static void comenzarPartidaDe4() {
 		SalaDeJuego sala = new SalaDeJuego("Sala De Prueba");
 		Jugador jugador1 = new Jugador("Jugador1Rojo", 1, "Rojo");
 		Jugador jugador2 = new Jugador("Jugador2Verde", 2, "Verde");
@@ -117,13 +138,27 @@ public class SalaDeJuego {
 		jugador3.ingresarASalaDeJuego(sala);
 		jugador4.ingresarASalaDeJuego(sala);
 		jugador1.iniciarPartida(sala);
+	}
+
+	public static void main(String[] args) {
+		// Juego de 4 jugadores--------------
+//		SalaDeJuego sala = new SalaDeJuego("Sala De Prueba");
+//		Jugador jugador1 = new Jugador("Jugador1Rojo", 1, "Rojo");
+//		Jugador jugador2 = new Jugador("Jugador2Verde", 2, "Verde");
+//		Jugador jugador3 = new Jugador("Jugador3Azul", 3, "Azul");
+//		Jugador jugador4 = new Jugador("Jugador4Amarillo", 4, "Amarillo");
+//		jugador1.ingresarASalaDeJuego(sala);
+//		jugador2.ingresarASalaDeJuego(sala);
+//		jugador3.ingresarASalaDeJuego(sala);
+//		jugador4.ingresarASalaDeJuego(sala);
+//		jugador1.iniciarPartida(sala);
 		// ----------------------------------
 
 		// Juego de 3 jugadores--------------
 //		SalaDeJuego sala = new SalaDeJuego("Sala De Prueba");
-//		Jugador jugador1 = new Jugador("Cami", 1, "Rojo");
-//		Jugador jugador2 = new Jugador("Sofi", 2, "Verde");
-//		Jugador jugador3 = new Jugador("Juanchi", 3, "Azul");
+//		Jugador jugador1 = new Jugador("Jugador1Rojo", 1, "Rojo");
+//		Jugador jugador2 = new Jugador("Jugador2Verde", 2, "Verde");
+//		Jugador jugador3 = new Jugador("Jugador3Azul", 3, "Azul");
 //		jugador1.ingresarASalaDeJuego(sala);
 //		jugador2.ingresarASalaDeJuego(sala);
 //		jugador3.ingresarASalaDeJuego(sala);
@@ -138,5 +173,7 @@ public class SalaDeJuego {
 //		jugador2.ingresarASalaDeJuego(sala);
 //		jugador1.iniciarPartida(sala);
 		// ----------------------------------
+		
+		comenzarPartidaDe2();
 	}
 }

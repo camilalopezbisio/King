@@ -3,6 +3,7 @@ package InterfazGrafica;
 import java.awt.Dimension;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import kingdomino.Ficha;
@@ -24,7 +25,7 @@ public class VentanaPartida extends JFrame {
 	private Container contentPane;
 	private ArrayList<BufferedImage> terrenos;
 
-	public VentanaPartida(SalaDeJuego sala, String tipoMazo) {
+	public VentanaPartida(SalaDeJuego sala) {
 		this.sala = sala;
 
 		this.setTitle(sala.getNombreSala());
@@ -40,35 +41,14 @@ public class VentanaPartida extends JFrame {
 		terrenos = new ArrayList<BufferedImage>();
 		try {
 			for (int i = 0; i < 17; i++) {
-				terrenos.add(ImageIO.read(new File("src/" + tipoMazo +"/" + i + ".png")));
+				terrenos.add(ImageIO.read(new File("imagenes/" + i + ".png")));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-//		terrenos = new ArrayList<BufferedImage>();
-//		try {
-//			for (int i = 0; i < 5; i++) {
-//				terrenos.add(ImageIO.read(new File("src/MazoSimpsons/" + i + ".png")));
-//			}
-//			
-//			for (int i = 5; i < 8; i++) {
-//				terrenos.add(ImageIO.read(new File("src/MazoTradicional/" + i + ".png")));
-//			}
-//			
-//			for (int i = 8; i < 10; i++) {
-//				terrenos.add(ImageIO.read(new File("src/MazoSimpsons/" + i + ".png")));
-//			}
-//			
-//			for (int i = 10; i < 17; i++) {
-//				terrenos.add(ImageIO.read(new File("src/MazoTradicional/" + i + ".png")));
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 
 		tableros = new PanelTablero(this, sala.getJugadores(), 0);
-		tableros.setBounds(0, 250, 1200, 450);
+		tableros.setBounds(0, 78, 1200, 622);
 		contentPane.add(tableros);
 	}
 

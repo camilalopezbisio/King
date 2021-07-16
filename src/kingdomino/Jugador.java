@@ -1,10 +1,13 @@
 package kingdomino;
 
+import java.io.PrintStream;
+import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import InterfazGrafica.VentanaPartida;
+import conexionRed.ServerThread;
 
 public class Jugador {
 
@@ -15,11 +18,26 @@ public class Jugador {
 	private Tablero tablero;
 //	private Rey rey1;
 //	private Rey rey2;
+	Socket socket = null;
+	int portNumber = 444;
+	
 
 	public Jugador(String nombre, int numeroId, String color) {
 		this.nombreJugador = nombre;
 		this.numeroId = numeroId;
 		this.color = color;
+//		try {
+//			socket = new Socket("localhost", portNumber);
+//			Thread.sleep(1000);
+//			PrintStream ps = new PrintStream(socket.getOutputStream(), true);
+//			String name = "Maikcrosoft";
+//			ps.println(name);
+//			Thread server = new Thread(new ServerThread(socket, name));
+//			server.start();
+//		} catch (Exception e) {
+//			System.err.println("ERROR EN EL CLIENTE");
+//
+//		}
 	}
 
 	public SalaDeJuego crearSalaDeJuego(String nombre) {
@@ -30,9 +48,9 @@ public class Jugador {
 
 	public void ingresarASalaDeJuego(SalaDeJuego sala) {
 		if (sala.isEstado() == true)
-			System.out.println("La sala ya inició su partida. No se puede ingresar");
+			System.out.println("La sala ya inicio su partida. No se puede ingresar");
 		else if (sala.admitirJugador(this) == false)
-			System.out.println("La sala está completa. No se puede ingresar");
+			System.out.println("La sala esta completa. No se puede ingresar");
 	}
 
 	public void salirDeLaSala(SalaDeJuego sala) {
@@ -40,7 +58,7 @@ public class Jugador {
 	}
 
 	// cualquier jugador puede iniciar una partida (siempre que haya al menos otro
-	// jugador en la sala con él)
+	// jugador en la sala con ï¿½l)
 	public void iniciarPartida(SalaDeJuego sala) {
 		sala.crearPartida();
 	}
@@ -90,11 +108,11 @@ public class Jugador {
 						fichaColocada = true;
 					} else
 						JOptionPane.showMessageDialog(null, "Los territorios adyacentes no coinciden",
-								"Posición Incorrecta", JOptionPane.INFORMATION_MESSAGE, null);
+								"Posicion Incorrecta", JOptionPane.INFORMATION_MESSAGE, null);
 				}
 			} else {
 				fichaColocada = true;
-				JOptionPane.showMessageDialog(null, "Descartaste tu ficha. Terminá tu turno", "Descarte",
+				JOptionPane.showMessageDialog(null, "Descartaste tu ficha. Termino tu turno", "Descarte",
 						JOptionPane.INFORMATION_MESSAGE, null);
 				ventana.terminarTurno();
 			}
@@ -133,12 +151,12 @@ public class Jugador {
 	private boolean validarPosicion(int fila, int columna) {
 		if (this.tablero.getFilaMin() > fila || fila > this.tablero.getFilaMax()
 				|| this.tablero.getColumnaMin() > columna || columna > this.tablero.getColumnaMax()) {
-			JOptionPane.showMessageDialog(null, "La posición está fuera de los límites", "Posición Incorrecta",
+			JOptionPane.showMessageDialog(null, "La posicion esta fuera de los limites", "Posicion Incorrecta",
 					JOptionPane.INFORMATION_MESSAGE, null);
 			return false;
 		}
 		if (this.tablero.getTablero(fila, columna).getTipo() != "Vacio") {
-			JOptionPane.showMessageDialog(null, "La posición ya tiene una ficha asignada", "Posición Incorrecta",
+			JOptionPane.showMessageDialog(null, "La posicion ya tiene una ficha asignada", "Posicion Incorrecta",
 					JOptionPane.INFORMATION_MESSAGE, null);
 			return false;
 		}
@@ -195,3 +213,7 @@ public class Jugador {
 //	}
 
 }
+
+
+
+

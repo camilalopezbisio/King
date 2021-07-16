@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
+
+import kingdomino.SalaDeJuego;
 
 public class PantallaInicio extends JFrame {
 
@@ -46,7 +49,10 @@ public class PantallaInicio extends JFrame {
 		botonJugar.setText("Jugar");
 		botonJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				botonJugarActionPerformed(evt);
+				Lobby lobby = new Lobby(null, txtNombre.getText() ,new Socket());
+				lobby.setVisible(true);
+				setVisible(false);
+//				SalaDeJuego.comenzarPartidaDe2();
 			}
 		});
 		txtId = new JTextField();
@@ -109,10 +115,6 @@ public class PantallaInicio extends JFrame {
 		getContentPane().setLayout(layout);
 
 		pack();
-	}
-
-	private void botonJugarActionPerformed(ActionEvent evt) {
-		txtNombre.setText("\"Bienvenido\"");
 	}
 
 	/**
