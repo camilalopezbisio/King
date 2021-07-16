@@ -100,7 +100,7 @@ public class PanelTablero extends JPanel {
 		this.y = 20;
 
 		g2d.setColor(Color.BLACK);
-		g2d.setFont(new Font("Consolas", Font.PLAIN, 16));
+		g2d.setFont(new Font("Consolas", Font.BOLD, 16));
 		g2d.drawString("Es el turno de: " + jugadores.get(turno).getNombreJugador(), 470, 10);
 
 		for (int i = 0; i < jugadores.get(turno).getTablero().getTableroMatriz().length; i++) {

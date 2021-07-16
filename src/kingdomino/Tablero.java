@@ -59,24 +59,24 @@ public class Tablero {
 			grupo.add(tablero[x][y]);
 			tablero[x][y].setPuntuado(true);
 
-			if ((x + 1 != 9) && tablero[x + 1][y].getTipo() == tablero[x][y].getTipo()
+			if (x < 8 && tablero[x + 1][y].getTipo() == tablero[x][y].getTipo() && (x + 1 != filaMax + 1)
 					&& tablero[x + 1][y].isPuntuado() == false) {
 				buscarGrupoDeTerritorios(x + 1, y);
 			}
 
-			if ((x - 1 != -1) && tablero[x - 1][y].getTipo() == tablero[x][y].getTipo()
+			if (x > 0 && tablero[x - 1][y].getTipo() == tablero[x][y].getTipo() && (x - 1 != filaMin - 1)
 					&& !tablero[x - 1][y].isPuntuado()) {
 				buscarGrupoDeTerritorios(x - 1, y);
 
 			}
 
-			if ((y + 1 != 9) && tablero[x][y + 1].getTipo() == tablero[x][y].getTipo()
+			if (y < 8 && tablero[x][y + 1].getTipo() == tablero[x][y].getTipo() && (y + 1 != columnaMax + 1)
 					&& !tablero[x][y + 1].isPuntuado()) {
 				buscarGrupoDeTerritorios(x, y + 1);
 
 			}
 
-			if ((y - 1 != -1) && tablero[x][y - 1].getTipo() == tablero[x][y].getTipo()
+			if (y > 0 && tablero[x][y - 1].getTipo() == tablero[x][y].getTipo() && (y - 1 != columnaMin - 1)
 					&& !tablero[x][y - 1].isPuntuado()) {
 				buscarGrupoDeTerritorios(x, y - 1);
 

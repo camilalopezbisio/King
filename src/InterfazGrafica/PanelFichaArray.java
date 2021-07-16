@@ -40,11 +40,11 @@ public class PanelFichaArray extends JPanel {
 		reyesImagenes = new ArrayList<BufferedImage>();
 
 		try {
-			reyesImagenes.add(ImageIO.read(new File("src/imagenes/corona_blanca.png")));
-			reyesImagenes.add(ImageIO.read(new File("src/imagenes/corona_roja.png")));
-			reyesImagenes.add(ImageIO.read(new File("src/imagenes/corona_azul.png")));
-			reyesImagenes.add(ImageIO.read(new File("src/imagenes/corona_amarilla.png")));
-			reyesImagenes.add(ImageIO.read(new File("src/imagenes/corona_verde.png")));
+			reyesImagenes.add(ImageIO.read(new File("imagenes/corona_blanca.png")));
+			reyesImagenes.add(ImageIO.read(new File("imagenes/corona_roja.png")));
+			reyesImagenes.add(ImageIO.read(new File("imagenes/corona_azul.png")));
+			reyesImagenes.add(ImageIO.read(new File("imagenes/corona_amarilla.png")));
+			reyesImagenes.add(ImageIO.read(new File("imagenes/corona_verde.png")));
 
 		} catch (IOException e1) {
 			e1.printStackTrace();
